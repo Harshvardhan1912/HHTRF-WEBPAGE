@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Discussion Forum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --surface: #fff;
+            --border: #e9ecef;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background: #f8f9fa;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        /* Card Styles */
+        .post-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+
+        .post-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            align-items: center;
+        }
+
+        .author-badge {
+            background: #f0f2f5;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        /* Voting System */
+        .vote-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1.25rem 0;
+        }
+
+        .vote-btn {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .vote-btn.active {
+            background: #ffffff; 
+            border-color: #e9ecef;
+            color: rgb(19, 19, 19);
+        }
+
+        .vote-count {
+            font-weight: 700;
+            font-size: 1.1rem;
+            min-width: 40px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        /* Comments Link */
+        .comments-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .comments-link:hover {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Control Bar */
+        .control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: var(--surface);
+        }
+
+        .new-post-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .new-post-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .forum-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .control-bar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="forum-header">
+        <div class="brand">HHTRF Forum</div>
+        <nav>
+            <a href="#" class="new-post-btn">
+                <i class="fas fa-plus"></i>
+                New Post
+            </a>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="control-bar">
+            <select class="sort-select">
+                <option>Newest First</option>
+                <option>Most Votes</option>
+                <option>Trending</option>
+            </select>
+            <div class="stats">
+                <span class="post-count">Showing 3 discussions</span>
+            </div>
+        </div>
+
+        <div class="posts-grid">
+            <!-- Post 1 -->
+            <article class="post-card">
+                <h3 class="post-title">Best Practices for Horticulture and Hydroponic Systems</h3>
+                <div class="post-meta">
+                    <span class="author-badge">Rohan_Dev</span>
+                    <time datetime="2024-03-15">March 5, 2025</time>
+                </div>
+                <div class="vote-container">
+                    <button class="vote-btn upvote">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <span class="vote-count">142</span>
+                    <button class="vote-btn downvote">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+                <a href="#" class="comments-link">
+                    <i class="fas fa-comment-dots"></i>
+                    28 Comments
+                </a>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post-card">
+                <h3 class="post-title">Seeds from around the world!</h3>
+                <div class="post-meta">
+                    <span class="author-badge">Sameer</span>
+                    <time datetime="2024-03-14">March 1, 2025</time>
+                </div>
+                <div class="vote-container">
+                    <button class="vote-btn upvote active">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <span class="vote-count">89</span>
+                    <button class="vote-btn downvote">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+                <a href="#" class="comments-link">
+                    <i class="fas fa-comment-dots"></i>
+                    45 Comments
+                </a>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post-card">
+                <h3 class="post-title">New research on Hydroponic systems has surfaced</h3>
+                <div class="post-meta">
+                    <span class="author-badge">Farmer_dev</span>
+                    <time datetime="2024-03-13">Feb 23, 2025</time>
+                </div>
+                <div class="vote-container">
+                    <button class="vote-btn upvote">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <span class="vote-count">204</span>
+                    <button class="vote-btn downvote">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+                <a href="#" class="comments-link">
+                    <i class="fas fa-comment-dots"></i>
+                    67 Comments
+                </a>
+            </article>
+        </div>
+    </div>   
+</body>
+</html>
